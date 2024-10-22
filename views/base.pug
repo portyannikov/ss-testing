@@ -1,0 +1,55 @@
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title #{title}
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    header
+      nav
+        ul.nav-list
+          li: a(href='#home') Главная
+          li: a(href='#shop') Магазин
+          li: a(href='#about') О нас
+          li: a(href='#contact') Контакты
+
+    section#home.hero
+      .container
+        h1 Добро пожаловать в наш магазин обуви!
+        p У нас вы найдете обувь на любой вкус и бюджет.
+        a.button(href='#shop') Перейти в магазин
+
+    section#shop
+      h2 Популярные товары
+      .products
+        each s in shoes
+          .product
+            img(src=`/img/${s.imageMain}`, alt='Sneakers')
+            h3= `${s.name}`
+            p= `Price: ${s.price} UAH`
+            a.button(href=`${s.slug}`) Buy
+                      //- .product-card
+          //-   img(src=`/img/${s.imageMain}`, alt='Sneakers')
+          //-   .product-info
+          //-     p= `Артикул: ${s.code}`
+          //-     h3=`${s.name}`
+          //-     p= `Gender: ${s.gender}`
+          //-     p.price= `${s.price} UAH`
+        
+    section#about
+      h2 О нас
+      p Мы продаем качественную обувь с доставкой по всей стране.
+
+    section#contact
+      h2 Контакты
+      form(action='/submit', method='POST')
+        label(for='name') Ваше имя:
+        input(type='text', id='name', name='name', required)
+        label(for='email') Ваш Email:
+        input(type='email', id='email', name='email', required)
+        label(for='message') Ваше сообщение:
+        textarea(id='message', name='message', required)
+        button(type='submit') Отправить
+
+    footer
+      p &copy; 2024 Магазин обуви. Все права защищены.
